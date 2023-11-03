@@ -20,21 +20,22 @@ namespace Dice_Game
             Die die1 = new Die();
             Die die2 = new Die();
             Console.WriteLine("Hello, care to play a little game?");
-            Thread.Sleep(200);
+            Thread.Sleep(1000);
             Console.WriteLine("You'll make a bet, and win money back if you guess correctly.");
-            Thread.Sleep(200);
-            Console.WriteLine("If you say 'Doubles', and the dice roll the same number, you'll gain double your bet.");
-            Thread.Sleep(200);
-            Console.WriteLine("If you say 'Not double', amd the die roll different numbers, you'll gain half yuour bet.");
-            Thread.Sleep(200);
-            Console.WriteLine("If you say 'Even sum', and the sum of the die roll is even you'll win your bet.");
-            Thread.Sleep(200);
-            Console.WriteLine("If you say 'Odd sum', and the sum of the die is even, you'll also win your bet. Now, let's play");
-            Thread.Sleep(200);
+            Thread.Sleep(1000);
 
 
             while (!done)
             {
+                Console.Clear();
+                Console.WriteLine("If you say 'Doubles', and the dice roll the same number, you'll gain double your bet.");
+                Thread.Sleep(200);
+                Console.WriteLine("If you say 'Not double', amd the die roll different numbers, you'll gain half yuour bet.");
+                Thread.Sleep(200);
+                Console.WriteLine("If you say 'Even sum', and the sum of the die roll is even you'll win your bet.");
+                Thread.Sleep(200);
+                Console.WriteLine("If you say 'Odd sum', and the sum of the die is even, you'll also win your bet. Now, let's play");
+                Thread.Sleep(200);
                 Console.WriteLine("What option will you pick?");
                 Thread.Sleep(200);
                 string choice = Convert.ToString(Console.ReadLine().ToUpper());
@@ -50,17 +51,17 @@ namespace Dice_Game
 
                 }
 
-                else if (choice == "NOT DOUBLE" || choice == "NOT")
+                else if (choice == "NOT DOUBLE")
                 {
                     Console.WriteLine("You are rolling for NOT doubles.");
                 }
 
-                else if (choice == "EVEN")
+                else if (choice == "EVEN SUM")
                 {
                     Console.WriteLine("You are rolling for an even sum.");
                 }
 
-                else if (choice == "ODD")
+                else if (choice == "ODD SUM")
                 {
                     Console.WriteLine("You are rolling for an odd sum.");
                 }
@@ -72,7 +73,7 @@ namespace Dice_Game
                     Console.WriteLine("Invalid bet, please bet again");
                     Console.ReadLine();
                 }
-                if (bet < 0 && bet > money)
+                if (bet > money)
                 {
                     Console.WriteLine($"You are betting {bet.ToString("C")}. May the odds be in your favour, good luck.");
                 }
@@ -101,12 +102,16 @@ namespace Dice_Game
                         total = bet * 2;
                         money = money + total;
                         Console.WriteLine($"Hey look at that, you won! You earned {total.ToString("C")}.");
+                        Console.WriteLine("Press ENTER  to go again.");
+                        Console.ReadLine();
                     }
 
-                    else if (die1 != die2)
+                    else if (die1.Roll != die2.Roll)
                     {
                         money = money - total;
                         Console.WriteLine($"Oh no! You lost! You lost {total.ToString("C")}!");
+                        Console.WriteLine("Press ENTER  to go again.");
+                        Console.ReadLine();
                     }
 
                 }
@@ -115,11 +120,13 @@ namespace Dice_Game
                 {
                     total = bet;
 
-                    if (die1 != die2)
+                    if (die1.Roll != die2.Roll)
                     {
                         total = bet / 2;
                         money = money + total;
                         Console.WriteLine($"Hey look at that, you won! You earned {total.ToString("C")}.");
+                        Console.WriteLine("Press ENTER  to go again.");
+                        Console.ReadLine();
 
                     }
 
@@ -127,6 +134,8 @@ namespace Dice_Game
                     {
                         money = money - total;
                         Console.WriteLine($"Oh no! You lost! You lost {total.ToString("C")}!");
+                        Console.WriteLine("Press ENTER  to go again.");
+                        Console.ReadLine();
                     }
                 }
 
@@ -138,10 +147,14 @@ namespace Dice_Game
                     if (rollTotal == 2|| rollTotal == 4 || rollTotal == 6 || rollTotal == 8 || rollTotal == 10 || rollTotal == 12 ) 
                     {
                         Console.WriteLine($"Hey look at that, you won! You earned {total.ToString("C")}.");
+                        Console.WriteLine("Press ENTER  to go again.");
+                        Console.ReadLine();
                     }
                     else if (rollTotal == 1 || rollTotal == 3 || rollTotal == 5 || rollTotal == 7 || rollTotal == 9 || rollTotal == 11)
                     {
                         Console.WriteLine($"Oh no! You lost! You lost {total.ToString("C")}!");
+                        Console.WriteLine("Press ENTER  to go again.");
+                        Console.ReadLine();
                     }
 
                 }
@@ -154,31 +167,29 @@ namespace Dice_Game
                     if (rollTotal == 1 || rollTotal == 3 || rollTotal == 5 || rollTotal == 7 || rollTotal == 9 || rollTotal == 11)
                     {
                         Console.WriteLine($"Hey look at that, you won! You earned {total.ToString("C")}.");
+                        Console.WriteLine("Press ENTER  to go again.");
+                        Console.ReadLine();
                     }
 
                     else if (rollTotal == 2 || rollTotal == 4 || rollTotal == 6 || rollTotal == 8 || rollTotal == 10 || rollTotal == 12)
                     {
                         Console.WriteLine($"Oh no! You lost! You lost {total.ToString("C")}!");
+                        Console.WriteLine("Press ENTER  to go again.");
+                        Console.ReadLine();
                     }
 
 
                 }
 
 
-
-
-               
-
                 if (money == 0)
                 {
-                    Console.WriteLine("It seems you have ran out of money, you can no longer play. Goodbye.");
+                    Console.WriteLine("It seems you have ran out of money, you can no longer play.");
+                    done = true;
 
                 }
-
-
-
             }
-
+            
             if (done == true) 
             {
                 Console.WriteLine($"Sorry to hear you're leaving. :( But hey, at least you're leaving with some cash! :3");
